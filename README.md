@@ -1,16 +1,3 @@
-# vue-iview
-
-使用vue-cli@3搭建的开发环境，使用iview组件库
-
-___最近更新时间：2019年9月29日11:33:36___
-
-### 相关组件插件列表
-
-1. iview，组件库
-2. axios，http工具，已添加到vue中，组件中使用方法: this.axios.get(url,{params:{}})
-3. dayjs，时间处理工具
-4. vue-photo-preview，图片放大工具
-
 ### 安装依赖
 ```shell script
 npm install
