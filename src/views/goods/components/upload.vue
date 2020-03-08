@@ -65,6 +65,7 @@
                 // 从 upload 实例删除数据
                 const fileList = this.$refs.upload.fileList
                 this.$refs.upload.fileList.splice(fileList.indexOf(file), 1)
+                this.$emit('success', this.$refs.upload.fileList)
             },
             handleSuccess(res, file, fileList) {
                 file.url = res.data.imgurl

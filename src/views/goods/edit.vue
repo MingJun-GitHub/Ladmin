@@ -11,6 +11,14 @@
                     </RadioGroup>
                 </FormItem>
 
+                <FormItem label="商品分类">
+                    <Select v-model="goods.categoryType">
+                        <Option v-for="(item,index) in allCategory" :value="item.id" :key="index"
+                            :checked.sync="goods.categoryType==item.id">
+                            {{item.categoryName}}</Option>
+                    </Select>
+                </FormItem>
+
                 <FormItem label="商品名">
                     <Input v-model="goods.title" placeholder="请输入商品名" />
                 </FormItem>
@@ -110,7 +118,7 @@
                 border: 0,
                 goods: {
                     title: '', // 商品名
-                    categoryType: 0, // 商品分类
+                    categoryType: 1, // 商品分类
                     deletePrice: 0, // 划线价
                     price: 0, // 价格 （单位分）
                     productDescription: "",
@@ -128,6 +136,7 @@
                 productGroupNameList: [],
                 skuName: '', // 规格名
                 defaultList: [],
+                allCategory: [],
                 thumbsDetails: [],
                 productDetails: [],
                 uploadList: [],
@@ -183,10 +192,16 @@
             this.productId = this.$route.params.id || ''
             this.isEdit = !!this.productId
             this.getAllSkuName() // 列出商品规格
+            this.getFindAllCategory()
             await this.getProductGroupNameId()
             this.productId && await this.getProductInfo()
         },
         methods: {
+            async getFindAllCategory() {
+                const res = await this.$axios.get('/apiadmin/productCategory/findAllCategory')
+                this.allCategory = res.data
+                this.goods.categoryType = this.allCategory[0].id
+            },
             // 获取商品信息
             async getProductInfo() {
                 const res = await this.$axios.get(`/apiadmin/product/findProductInfoById/${this.productId}`)
@@ -496,6 +511,32 @@
                         content: '请输入商品库存'
                     })
                     return
+                }
+                if (!this.selectSku.length) {
+                    this.$Message.error({
+                        content: '请选择商品规格或者新建商品规格'
+                    })
+                    return false
+                }
+                if (!this.allSkuComList.length) {
+                    this.$Message.error({
+                        content: '请选择规格值与填写对应的价格，划线价，库存'
+                    })
+                    return false
+                }
+                if (this.allSkuComList.length) {
+                    let result = 0
+                    for (let i =0; i< this.allSkuComList.length; i++) {
+                        console.log('this.allSkuComList', this.allSkuComList[i])
+                        if (this.allSkuComList[i].price == '' || this.allSkuComList[i].costPrice =='' || this.allSkuComList[i].stockNum =='') {
+                            this.$Message.error({
+                                content: '请填写组合价格，划线价，库存'
+                            })
+                            result++
+                            break
+                        }
+                    }
+                    return result == 0
                 }
                 return true
             },

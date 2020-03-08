@@ -67,19 +67,19 @@
         </div>
         <div class="goods_list__item" style="margin-top: 20px; max-width: 86%;" >
             <Card :bordered="true">
-                <div slot="title">
+                <p slot="title">商品列表</p>
                     <!-- <Checkbox :checked.sync="single">当前页全选</Checkbox> -->
                     <!-- <Button>上架</Button>  -->
                     <!-- <Button>下架</Button> -->
                     <!-- <Button>删除</Button> -->
-                </div>
+                
                 <Table border ref="selection" :columns="columns" :data="goodsList">
                     <template slot-scope="{ row, index }" slot="thumbs">
                         <img :src="row.thumb" width="100" height="auto" />
                     </template>
                     <template slot-scope="{ row, index }" slot="options">
                         <Button type="primary" size="small" @click="goGoods(row.id)">编辑</Button>
-                        <Button type="error" size="small" @click="deleteGoods(row.id)">删除</Button>
+                        <!-- <Button type="error" size="small" @click="deleteGoods(row.id)">删除</Button> -->
                         <Button type="warning" size="small" @click="downGoods(row.id)">下架</Button>
                     </template></Table>
                 <Row class="pages">
@@ -98,11 +98,14 @@
         name: '',
         data() {
             return {
-                columns: [{
+                columns: [
+                    /*
+                    {
                         type: 'selection',
                         width: 60,
                         align: 'center'
                     },
+                    */
                     {
                         title: '序号',
                         key: 'id'

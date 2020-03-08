@@ -11,8 +11,10 @@ import 'iview/dist/styles/iview.css'
 import '@/style/global.scss'
 
 axios.interceptors.request.use(config => {
+  // console.log('config', config)
   config.headers = {
-    token: cookie.get('token')
+    token: cookie.get('token'),
+    'Content-Type': config.headers['Content-Type'] || 'application/json'
   }
   return config
 }, error => {

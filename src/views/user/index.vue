@@ -23,11 +23,10 @@
                     <template slot-scope="{ row, index }" slot="headers">
                         <img :src="row.userLogo" width="80" />
                     </template>
-                    <template slot-scope="{ row, index }" slot="options">
+                    <!-- <template slot-scope="{ row, index }" slot="options">
                         <Button type="primary" size="small" @click="goMsg(row, index)">发短信</Button>
-                        <!-- <Button type="error" size="small">删除</Button>
-                        <Button type="warning" size="small">下架</Button> -->
-                    </template></Table>
+                    </template> -->
+                    </Table>
                 </Table>
                 <Row class="pages">
                     <Col :span="24">
@@ -87,10 +86,10 @@
                         title: '注册时间',
                         key: 'createTime'
                     },
-                    {
-                        title: '操作',
-                        slot: 'options'
-                    }
+                    // {
+                    //     title: '操作',
+                    //     slot: 'options'
+                    // }
                 ],
                 total: 0,
                 userList: []
@@ -170,12 +169,10 @@
         align-items: center;
         white-space: nowrap;
         flex-wrap: nowrap;
-        padding: 10px;
+        padding: 5px 2px;
         border: 1px solid #cfcfcf;
         background: #efefef;
         margin: 10px;
-        width: 100%;
-
         .info {
             margin-left: 10px;
             white-space: nowrap;

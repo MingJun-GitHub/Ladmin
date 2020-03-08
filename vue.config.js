@@ -34,7 +34,7 @@ module.exports = {
     // },
     proxy: {
       '/apiadmin': {
-        target: 'http://47.112.113.141:8100/apiadmin',
+        target: 'http://47.112.107.132:8100/apiadmin',
         pathRewrite: {'^/apiadmin' : ''},
         changeOrigin: true,     // target是域名的话，需要这个参数，
         secure: false,          // 设置支持https协议的代理
